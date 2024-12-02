@@ -6,26 +6,26 @@ import pl.pkasiewicz.domain.loginandregister.dto.UserDto;
 
 class LoginAndRegisterMapper {
 
-    public static User mapToEntity(RegisterUserDto registerUserDto) {
+    static User mapToEntity(RegisterUserDto registerUserDto) {
         return User.builder()
                         .username(registerUserDto.username())
                         .password(registerUserDto.password())
                         .build();
     }
 
-    public static RegistrationResultDto mapToRegistrationResultDto(User user) {
+    static RegistrationResultDto mapToRegistrationResultDto(User user) {
         return RegistrationResultDto.builder()
-                .id(user.getId())
+                .id(user.id())
                 .created(true)
-                .username(user.getUsername())
+                .username(user.username())
                 .build();
     }
 
-    public static UserDto mapToUserDto(User user) {
+    static UserDto mapToUserDto(User user) {
         return UserDto.builder()
-                .id(user.getId())
-                .username(user.getUsername())
-                .password(user.getPassword())
+                .id(user.id())
+                .username(user.username())
+                .password(user.password())
                 .build();
     }
 }

@@ -5,7 +5,7 @@ import java.util.Optional;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 
-public class InMemoryLoginRepository implements LoginRepository {
+class InMemoryLoginRepository implements LoginRepository {
 
     Map<String, User> database = new ConcurrentHashMap<>();
 
@@ -19,10 +19,10 @@ public class InMemoryLoginRepository implements LoginRepository {
         UUID id = UUID.randomUUID();
         User user = new User(
                 id.toString(),
-                entity.getUsername(),
-                entity.getPassword()
+                entity.username(),
+                entity.password()
         );
-        database.put(user.getUsername(), user);
+        database.put(user.username(), user);
         return user;
     }
 }

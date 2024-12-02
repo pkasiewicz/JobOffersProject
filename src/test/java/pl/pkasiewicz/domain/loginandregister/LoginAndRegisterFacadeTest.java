@@ -15,9 +15,10 @@ import static org.junit.jupiter.api.Assertions.assertAll;
 
 class LoginAndRegisterFacadeTest {
 
-    private final LoginRepository loginRepository = new InMemoryLoginRepository();
-    private final LoginAndRegisterFacade loginAndRegisterFacade = new LoginAndRegisterConfiguration().createForTest(loginRepository);
-    
+    LoginAndRegisterFacade loginAndRegisterFacade = new LoginAndRegisterFacade(
+            new InMemoryLoginRepository()
+    );
+
     @Test
     void should_register_user() {
         //given
