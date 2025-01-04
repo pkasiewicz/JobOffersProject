@@ -1,4 +1,4 @@
-package pl.pkasiewicz.domain;
+package pl.pkasiewicz;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

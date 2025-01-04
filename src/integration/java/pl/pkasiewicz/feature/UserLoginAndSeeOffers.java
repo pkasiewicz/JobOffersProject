@@ -3,10 +3,10 @@ package pl.pkasiewicz.feature;
 import org.junit.jupiter.api.Test;
 import pl.pkasiewicz.BaseIntegrationTest;
 
-public class HappyPathIntegrationTest extends BaseIntegrationTest {
+public class UserLoginAndSeeOffers extends BaseIntegrationTest {
 
     @Test
-    public void should_user_login_and_see_offers_from_external_server() {
+    public void user_should_login_and_see_offers_from_external_server() {
 //# typical path: user want to see offers but have to be logged in and external server should have some offers
 //
 //    step 1: there are no offers in external HTTP server (http://ec2-3-120-147-150.eu-central-1.compute.amazonaws.com:5057/offers)
