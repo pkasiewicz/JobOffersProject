@@ -3,7 +3,7 @@ package pl.pkasiewicz.feature;
 import org.junit.jupiter.api.Test;
 import pl.pkasiewicz.BaseIntegrationTest;
 
-public class UserLoginAndSeeOffers extends BaseIntegrationTest {
+public class UserLoginAndSeeOffersIntegrationTest extends BaseIntegrationTest {
 
     @Test
     public void user_should_login_and_see_offers_from_external_server() {
