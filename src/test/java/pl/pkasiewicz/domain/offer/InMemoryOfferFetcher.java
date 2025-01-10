@@ -9,10 +9,10 @@ class InMemoryOfferFetcher implements OfferFetcher {
     @Override
     public List<JobOfferDto> fetchOffers() {
         return List.of(
-                new JobOfferDto("Amazon", "Java Developer", "8000-10000", "sampleUrl1"),
-                new JobOfferDto("Google", "Senior Java Developer", "10000", "sampleUrl2"),
-                new JobOfferDto("Apple", "Junior Java Developer", "7000", "sampleUrl3"),
-                new JobOfferDto("Allegro", "Fullstack Developer", "12000", "sampleUrl4")
+                new JobOfferDto("Java Developer", "Amazon", "8000-10000", "sampleUrl1"),
+                new JobOfferDto("Senior Java Developer", "Google", "10000", "sampleUrl2"),
+                new JobOfferDto("Junior Java Developer", "Apple", "7000", "sampleUrl3"),
+                new JobOfferDto("Fullstack Developer", "Allegro", "12000", "sampleUrl4")
         );
     }
 }
