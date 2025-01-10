@@ -27,8 +27,8 @@ class OfferMapper {
 
     static Offer mapToEntityFromJobOfferDto(JobOfferDto jobOfferDto) {
         return Offer.builder()
-                .companyName(jobOfferDto.companyName())
-                .position(jobOfferDto.position())
+                .companyName(jobOfferDto.company())
+                .position(jobOfferDto.title())
                 .salary(jobOfferDto.salary())
                 .offerUrl(jobOfferDto.offerUrl())
                 .build();

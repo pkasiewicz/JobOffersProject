@@ -4,6 +4,6 @@ import pl.pkasiewicz.domain.offer.dto.JobOfferDto;
 
 import java.util.List;
 
-interface OfferFetcher {
+public interface OfferFetcher {
     List<JobOfferDto> fetchOffers();
 }
