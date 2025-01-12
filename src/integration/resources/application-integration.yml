@@ -1,0 +1,7 @@
+job-offers:
+  offer-fetcher:
+    scheduler:
+      delay: PT1s
+
+scheduling:
+  enabled: false
