@@ -6,7 +6,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import pl.pkasiewicz.BaseIntegrationTest;
 import pl.pkasiewicz.SampleJobOfferResponse;
+import pl.pkasiewicz.domain.offer.dto.OfferResponseDto;
 import pl.pkasiewicz.infrastructure.offer.scheduler.OfferFetcherScheduler;
+
+import java.util.List;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class UserWantToSeeOffersIntegrationTest extends BaseIntegrationTest implements SampleJobOfferResponse {
 
@@ -16,18 +21,19 @@ public class UserWantToSeeOffersIntegrationTest extends BaseIntegrationTest impl
     @Test
     public void user_want_to_see_offers_but_have_to_be_logged_in_and_external_server_should_have_some_offers() {
         //# typical path: user want to see offers but have to be logged in and external server should have some offers
-        //step 1: there are no offers in external HTTP server (http://ec2-3-120-147-150.eu-central-1.compute.amazonaws.com:5057/offers)
-        //given
+        // step 1: there are no offers in external HTTP server (http://ec2-3-120-147-150.eu-central-1.compute.amazonaws.com:5057/offers)
+        // given
         wireMockServer.stubFor(WireMock.get("/offers")
                 .willReturn(WireMock.aResponse()
                         .withStatus(HttpStatus.OK.value())
                         .withHeader("Content-Type", "application/json")
                         .withBody(bodyWithNoOffersInJson())));
 
-
-        //step 2: scheduler ran 1st time and made GET to external server and system added 0 offers to database
-        offerFetcherScheduler.fetchOffers();
-
+        // step 2: scheduler ran 1st time and made GET to external server and system added 0 offers to database
+        // when
+        List<OfferResponseDto> savedOffers = offerFetcherScheduler.fetchOffers();
+        // then
+        assertThat(savedOffers).isEmpty();
 
         //step 3: user tried to get JWT token by requesting POST /token with username=someUser, password=somePassword and system returned UNAUTHORIZED(401)
         //step 4: user made GET /offers with no jwt token and system returned UNAUTHORIZED(401)
