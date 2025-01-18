@@ -1,6 +1,5 @@
 package pl.pkasiewicz.infrastructure.offer.http;
 
-import lombok.AllArgsConstructor;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -10,10 +9,7 @@ import pl.pkasiewicz.domain.offer.OfferFetcher;
 import java.time.Duration;
 
 @Configuration
-@AllArgsConstructor
 public class OfferFetcherClientConfig {
-
-    private final OfferFetcherRestTemplateConfigurationProperties properties;
 
     @Bean
     public RestTemplateResponseErrorHandler restTemplateResponseErrorHandler() {
@@ -21,7 +17,8 @@ public class OfferFetcherClientConfig {
     }
 
     @Bean
-    public RestTemplate restTemplate(RestTemplateResponseErrorHandler restTemplateResponseErrorHandler) {
+    public RestTemplate restTemplate(RestTemplateResponseErrorHandler restTemplateResponseErrorHandler,
+                                     OfferFetcherRestTemplateConfigurationProperties properties) {
         return new RestTemplateBuilder()
                 .errorHandler(restTemplateResponseErrorHandler)
                 .setConnectTimeout(Duration.ofMillis(properties.connectionTimeout()))
@@ -30,7 +27,8 @@ public class OfferFetcherClientConfig {
     }
 
     @Bean
-    public OfferFetcher remoteOfferFetcherClient(RestTemplate restTemplate) {
+    public OfferFetcher remoteOfferFetcherClient(RestTemplate restTemplate,
+                                                 OfferFetcherRestTemplateConfigurationProperties properties) {
         return new OfferFetcherRestTemplate(restTemplate, properties.uri(), properties.port());
-}
+    }
 }
