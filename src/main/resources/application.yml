@@ -2,6 +2,9 @@ spring:
   data:
     mongodb:
       uri: mongodb://admin:admin@localhost:27017/joboffers
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
 
 job-offers:
   offer-fetcher:
