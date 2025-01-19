@@ -22,4 +22,10 @@ public class JobOfferRestController {
         List<OfferResponseDto> allOffers = offerFacade.findAllOffers();
         return ResponseEntity.ok(allOffers);
     }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<OfferResponseDto> getOfferById(@PathVariable String id) {
+        OfferResponseDto offer = offerFacade.findOfferById(id);
+        return ResponseEntity.ok(offer);
+    }
 }
