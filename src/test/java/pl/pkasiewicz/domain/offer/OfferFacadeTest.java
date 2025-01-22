@@ -2,6 +2,7 @@ package pl.pkasiewicz.domain.offer;
 
 import org.assertj.core.api.AssertionsForClassTypes;
 import org.junit.jupiter.api.Test;
+import org.springframework.dao.DuplicateKeyException;
 import pl.pkasiewicz.domain.offer.dto.OfferRequestDto;
 import pl.pkasiewicz.domain.offer.dto.OfferResponseDto;
 
@@ -39,7 +40,7 @@ class OfferFacadeTest {
         //then
         AssertionsForClassTypes.assertThat(thrown)
                 .isInstanceOf(OfferNotFoundException.class)
-                .hasMessageContaining(String.format("Offer with this id does not exist: %s", id));
+                .hasMessageContaining(String.format("Offer with id [%s] not found", id));
     }
 
     @Test
@@ -91,8 +92,8 @@ class OfferFacadeTest {
         Throwable thrown = catchThrowable(() -> offerFacade.saveOffer(actual));
         //then
         AssertionsForClassTypes.assertThat(thrown)
-                .isInstanceOf(OfferDuplicationException.class)
-                .hasMessageContaining("Offer with this url already exists: " + actual.offerUrl());
+                .isInstanceOf(DuplicateKeyException.class)
+                .hasMessageContaining("Offer with this url already exists: + [%s]", actual.offerUrl());
     }
 
     @Test

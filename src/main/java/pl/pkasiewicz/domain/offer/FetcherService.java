@@ -5,7 +5,7 @@ import lombok.AllArgsConstructor;
 import java.util.List;
 
 @AllArgsConstructor
-class FetcherService{
+class FetcherService {
 
     private final OfferRepository offerRepository;
     private final OfferFetcher offerFetcher;
@@ -13,11 +13,7 @@ class FetcherService{
     public List<Offer> fetchAndSaveAllOffersIfNotExists() {
         List<Offer> fetchedOffers = fetchOffers();
         List<Offer> filteredOffers = filterOnlyNonExistingOffers(fetchedOffers);
-        try {
-            return offerRepository.saveAll(filteredOffers);
-        } catch (OfferDuplicationException e) {
-            throw new OfferDuplicationException(e.getMessage(), filteredOffers);
-        }
+        return offerRepository.saveAll(filteredOffers);
     }
 
     private List<Offer> fetchOffers() {

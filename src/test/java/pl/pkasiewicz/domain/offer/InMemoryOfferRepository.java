@@ -1,5 +1,6 @@
 package pl.pkasiewicz.domain.offer;
 
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -18,7 +19,7 @@ class InMemoryOfferRepository implements OfferRepository {
     @Override
     public <S extends Offer> S save(S entity) {
         if (database.values().stream().anyMatch(offer -> offer.offerUrl().equals(entity.offerUrl()))) {
-            throw new OfferDuplicationException(entity.offerUrl());
+            throw new DuplicateKeyException(String.format("Offer with this url already exists: + [%s]", entity.offerUrl()));
         }
         int id = database.size() + 1;
         Offer offer = Offer.builder()
