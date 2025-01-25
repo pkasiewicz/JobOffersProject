@@ -2,7 +2,12 @@ package pl.pkasiewicz.controller.error;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.http.MediaType;
+import org.springframework.test.context.DynamicPropertyRegistry;
+import org.springframework.test.context.DynamicPropertySource;
 import org.springframework.test.web.servlet.ResultActions;
+import org.testcontainers.containers.MongoDBContainer;
+import org.testcontainers.junit.jupiter.Container;
+import org.testcontainers.utility.DockerImageName;
 import pl.pkasiewicz.BaseIntegrationTest;
 import pl.pkasiewicz.infrastructure.offer.controller.error.JobOfferPostErrorResponse;
 
@@ -11,6 +16,14 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 public class JobOfferDuplicateExceptionIntegrationTest extends BaseIntegrationTest {
+
+    @Container
+    public static final MongoDBContainer mongoDBContainer = new MongoDBContainer(DockerImageName.parse("mongo:4.0.10"));
+
+    @DynamicPropertySource
+    public static void propertyOverride(DynamicPropertyRegistry registry) {
+        registry.add("spring.data.mongodb.uri", mongoDBContainer::getReplicaSetUrl);
+    }
 
     @Test
     public void should_return_409_conflict_when_trying_to_add_offer_with_same_url() throws Exception {
@@ -25,7 +38,7 @@ public class JobOfferDuplicateExceptionIntegrationTest extends BaseIntegrationTe
                             "offerUrl": "testUrl"
                         }
                         """.trim())
-                .contentType(MediaType.APPLICATION_JSON_VALUE + ";charset=utf-8")
+                .contentType(MediaType.APPLICATION_JSON_VALUE)
         );
 
         // then
@@ -42,7 +55,7 @@ public class JobOfferDuplicateExceptionIntegrationTest extends BaseIntegrationTe
                             "offerUrl": "testUrl"
                         }
                         """.trim())
-                .contentType(MediaType.APPLICATION_JSON_VALUE + ";charset=utf-8")
+                .contentType(MediaType.APPLICATION_JSON_VALUE)
         );
         // then
         String json = secondRequest.andExpect(status().isConflict())
