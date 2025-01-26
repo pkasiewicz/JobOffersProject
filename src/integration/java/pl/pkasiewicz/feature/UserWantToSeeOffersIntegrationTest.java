@@ -8,7 +8,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.DynamicPropertyRegistry;
 import org.springframework.test.context.DynamicPropertySource;
-import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.ResultActions;
 import org.testcontainers.containers.MongoDBContainer;
 import org.testcontainers.junit.jupiter.Container;
@@ -202,8 +201,10 @@ public class UserWantToSeeOffersIntegrationTest extends BaseIntegrationTest impl
                 .contentType(MediaType.APPLICATION_JSON_VALUE)
         );
         // then
-        MvcResult mvcResultWithSavedOffer = performPostResultWithOffer.andExpect(status().isCreated()).andReturn();
-        String jsonWithSavedOffer = mvcResultWithSavedOffer.getResponse().getContentAsString();
+        String jsonWithSavedOffer = performPostResultWithOffer.andExpect(status().isCreated())
+                .andReturn()
+                .getResponse()
+                .getContentAsString();
         OfferResponseDto savedOffer = objectMapper.readValue(jsonWithSavedOffer, OfferResponseDto.class);
 
         assertAll(
