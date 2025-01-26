@@ -9,7 +9,7 @@ import pl.pkasiewicz.domain.offer.OfferFetcher;
 import java.time.Duration;
 
 @Configuration
-public class OfferFetcherClientConfig {
+public class OfferFetcherRestTemplateConfig {
 
     @Bean
     public RestTemplateResponseErrorHandler restTemplateResponseErrorHandler() {
