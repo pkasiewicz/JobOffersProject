@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.dao.DuplicateKeyException;
 import pl.pkasiewicz.domain.offer.dto.OfferRequestDto;
 import pl.pkasiewicz.domain.offer.dto.OfferResponseDto;
+import pl.pkasiewicz.domain.offer.exceptions.OfferNotFoundException;
 
 import java.util.List;
 
