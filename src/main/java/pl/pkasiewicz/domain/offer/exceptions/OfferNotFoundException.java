@@ -1,4 +1,4 @@
-package pl.pkasiewicz.domain.offer;
+package pl.pkasiewicz.domain.offer.exceptions;
 
 import lombok.Getter;
 

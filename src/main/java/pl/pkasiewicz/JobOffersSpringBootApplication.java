@@ -5,9 +5,11 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
 import pl.pkasiewicz.infrastructure.offer.http.OfferFetcherRestTemplateConfigurationProperties;
+import pl.pkasiewicz.infrastructure.security.jwt.JwtConfigurationProperties;
 
 @SpringBootApplication
-@EnableConfigurationProperties({OfferFetcherRestTemplateConfigurationProperties.class})
+@EnableConfigurationProperties({OfferFetcherRestTemplateConfigurationProperties.class,
+        JwtConfigurationProperties.class})
 @EnableMongoRepositories
 public class JobOffersSpringBootApplication {
 

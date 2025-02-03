@@ -2,12 +2,11 @@ package pl.pkasiewicz.domain.loginandregister;
 
 import org.assertj.core.api.AssertionsForClassTypes;
 import org.junit.jupiter.api.Test;
+import org.springframework.dao.DuplicateKeyException;
+import org.springframework.security.authentication.BadCredentialsException;
 import pl.pkasiewicz.domain.loginandregister.dto.RegisterUserDto;
 import pl.pkasiewicz.domain.loginandregister.dto.RegistrationResultDto;
 import pl.pkasiewicz.domain.loginandregister.dto.UserDto;
-import pl.pkasiewicz.domain.loginandregister.exceptions.UserAlreadyExistException;
-import pl.pkasiewicz.domain.loginandregister.exceptions.UsernameNotFoundException;
-import pl.pkasiewicz.domain.loginandregister.exceptions.UsernameOrPasswordCannotBeNull;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.catchThrowable;
@@ -36,27 +35,15 @@ class LoginAndRegisterFacadeTest {
     void should_throw_user_already_exists_when_register_user() {
         //given
         RegisterUserDto existingUser = new RegisterUserDto("username", "password");
-        loginAndRegisterFacade.register(existingUser);
         RegisterUserDto registerUserDto = new RegisterUserDto("username", "password");
+        loginAndRegisterFacade.register(existingUser);
         //when
         Throwable thrown = catchThrowable(() -> loginAndRegisterFacade.register(registerUserDto));
         //then
         AssertionsForClassTypes.assertThat(thrown)
-                .isInstanceOf(UserAlreadyExistException.class)
+                .isInstanceOf(DuplicateKeyException.class)
                 .hasMessageContaining("User already exists");
 
-    }
-
-    @Test
-    void should_throw_username_or_password_cannot_be_empty_when_register_user() {
-        //given
-        RegisterUserDto registerUserDto = new RegisterUserDto("", null);
-        //when
-        Throwable thrown = catchThrowable(() -> loginAndRegisterFacade.register(registerUserDto));
-        //then
-        AssertionsForClassTypes.assertThat(thrown)
-                .isInstanceOf(UsernameOrPasswordCannotBeNull.class)
-                .hasMessageContaining("Username or password cannot be null");
     }
 
     @Test
@@ -78,7 +65,7 @@ class LoginAndRegisterFacadeTest {
         Throwable thrown = catchThrowable(() -> loginAndRegisterFacade.findByUsername(username));
         //then
         AssertionsForClassTypes.assertThat(thrown)
-                .isInstanceOf(UsernameNotFoundException.class)
+                .isInstanceOf(BadCredentialsException.class)
                 .hasMessageContaining("User not found");
     }
 }

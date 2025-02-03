@@ -7,9 +7,10 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
-import pl.pkasiewicz.domain.offer.OfferNotFoundException;
+import pl.pkasiewicz.domain.offer.exceptions.OfferNotFoundException;
+import pl.pkasiewicz.infrastructure.offer.controller.JobOfferRestController;
 
-@ControllerAdvice
+@ControllerAdvice(basePackageClasses = {JobOfferRestController.class})
 @Log4j2
 public class JobOfferControllerErrorHandler {
 

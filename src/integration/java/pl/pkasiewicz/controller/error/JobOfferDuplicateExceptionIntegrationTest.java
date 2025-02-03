@@ -2,6 +2,7 @@ package pl.pkasiewicz.controller.error;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.http.MediaType;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.DynamicPropertyRegistry;
 import org.springframework.test.context.DynamicPropertySource;
 import org.springframework.test.web.servlet.ResultActions;
@@ -26,6 +27,7 @@ public class JobOfferDuplicateExceptionIntegrationTest extends BaseIntegrationTe
     }
 
     @Test
+    @WithMockUser
     public void should_return_409_conflict_when_trying_to_add_offer_with_same_url() throws Exception {
         // step 1: saving first offer
         // given && when
@@ -40,7 +42,6 @@ public class JobOfferDuplicateExceptionIntegrationTest extends BaseIntegrationTe
                         """.trim())
                 .contentType(MediaType.APPLICATION_JSON_VALUE)
         );
-
         // then
         firstRequest.andExpect(status().isCreated());
 
@@ -63,6 +64,7 @@ public class JobOfferDuplicateExceptionIntegrationTest extends BaseIntegrationTe
                 .getResponse()
                 .getContentAsString();
         JobOfferPostErrorResponse result = objectMapper.readValue(json, JobOfferPostErrorResponse.class);
+
         assertThat(result.message()).isEqualTo("Offer with this url already exists");
     }
 }

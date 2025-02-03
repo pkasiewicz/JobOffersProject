@@ -3,6 +3,7 @@ package pl.pkasiewicz.domain.offer;
 import lombok.AllArgsConstructor;
 import pl.pkasiewicz.domain.offer.dto.OfferRequestDto;
 import pl.pkasiewicz.domain.offer.dto.OfferResponseDto;
+import pl.pkasiewicz.domain.offer.exceptions.OfferNotFoundException;
 
 import java.util.List;
 
