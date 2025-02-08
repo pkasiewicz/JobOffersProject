@@ -1,4 +1,11 @@
 spring:
+  cache:
+    type: redis
+    redis:
+      time-to-live: PT60M
+  redis:
+    host: ${REDIS_HOST:localhost}
+    port: ${REDIS_PORT:63792}
   data:
     mongodb:
       uri: mongodb://admin:admin@localhost:27017/joboffers
