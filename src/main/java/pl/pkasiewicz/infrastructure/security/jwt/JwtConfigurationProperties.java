@@ -2,7 +2,7 @@ package pl.pkasiewicz.infrastructure.security.jwt;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
-@ConfigurationProperties("auth.jwt")
+@ConfigurationProperties(prefix = "auth.jwt")
 public record JwtConfigurationProperties(
         String secret,
         long expirationDays,
