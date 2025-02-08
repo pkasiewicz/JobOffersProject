@@ -37,10 +37,8 @@ public class OfferFetcherRestTemplateErrorIntegrationTest {
                         .withStatus(HttpStatus.SC_OK)
                         .withHeader(CONTENT_TYPE_HEADER_KEY, APPLICATION_JSON_CONTENT_TYPE_VALUE)
                         .withFault(Fault.CONNECTION_RESET_BY_PEER)));
-
         // when
         Throwable throwable = catchThrowable(() -> offerFetcher.fetchOffers());
-
         // then
         assertThat(throwable).isInstanceOf(ResponseStatusException.class);
         assertThat(throwable.getMessage()).isEqualTo("500 INTERNAL_SERVER_ERROR");
@@ -54,10 +52,8 @@ public class OfferFetcherRestTemplateErrorIntegrationTest {
                         .withStatus(HttpStatus.SC_OK)
                         .withHeader(CONTENT_TYPE_HEADER_KEY, APPLICATION_JSON_CONTENT_TYPE_VALUE)
                         .withFault(Fault.EMPTY_RESPONSE)));
-
         // when
         Throwable throwable = catchThrowable(() -> offerFetcher.fetchOffers());
-
         // then
         assertThat(throwable).isInstanceOf(ResponseStatusException.class);
         assertThat(throwable.getMessage()).isEqualTo("500 INTERNAL_SERVER_ERROR");
@@ -71,10 +67,8 @@ public class OfferFetcherRestTemplateErrorIntegrationTest {
                         .withStatus(HttpStatus.SC_OK)
                         .withHeader(CONTENT_TYPE_HEADER_KEY, APPLICATION_JSON_CONTENT_TYPE_VALUE)
                         .withFault(Fault.MALFORMED_RESPONSE_CHUNK)));
-
         // when
         Throwable throwable = catchThrowable(() -> offerFetcher.fetchOffers());
-
         // then
         assertThat(throwable).isInstanceOf(ResponseStatusException.class);
         assertThat(throwable.getMessage()).isEqualTo("500 INTERNAL_SERVER_ERROR");
@@ -88,10 +82,8 @@ public class OfferFetcherRestTemplateErrorIntegrationTest {
                         .withStatus(HttpStatus.SC_OK)
                         .withHeader(CONTENT_TYPE_HEADER_KEY, APPLICATION_JSON_CONTENT_TYPE_VALUE)
                         .withFault(Fault.RANDOM_DATA_THEN_CLOSE)));
-
         // when
         Throwable throwable = catchThrowable(() -> offerFetcher.fetchOffers());
-
         // then
         assertThat(throwable).isInstanceOf(ResponseStatusException.class);
         assertThat(throwable.getMessage()).isEqualTo("500 INTERNAL_SERVER_ERROR");
@@ -104,10 +96,8 @@ public class OfferFetcherRestTemplateErrorIntegrationTest {
                 .willReturn(WireMock.aResponse()
                         .withStatus(HttpStatus.SC_NO_CONTENT)
                         .withHeader(CONTENT_TYPE_HEADER_KEY, APPLICATION_JSON_CONTENT_TYPE_VALUE)));
-
         // when
         Throwable throwable = catchThrowable(() -> offerFetcher.fetchOffers());
-
         // then
         assertThat(throwable).isInstanceOf(ResponseStatusException.class);
         assertThat(throwable.getMessage()).isEqualTo("204 NO_CONTENT");
@@ -121,10 +111,8 @@ public class OfferFetcherRestTemplateErrorIntegrationTest {
                         .withStatus(HttpStatus.SC_OK)
                         .withHeader(CONTENT_TYPE_HEADER_KEY, APPLICATION_JSON_CONTENT_TYPE_VALUE)
                         .withFixedDelay(5000)));
-
         // when
         Throwable throwable = catchThrowable(() -> offerFetcher.fetchOffers());
-
         // then
         assertThat(throwable).isInstanceOf(ResponseStatusException.class);
         assertThat(throwable.getMessage()).isEqualTo("500 INTERNAL_SERVER_ERROR");
@@ -137,10 +125,8 @@ public class OfferFetcherRestTemplateErrorIntegrationTest {
                 .willReturn(WireMock.aResponse()
                         .withStatus(HttpStatus.SC_NOT_FOUND)
                         .withHeader(CONTENT_TYPE_HEADER_KEY, APPLICATION_JSON_CONTENT_TYPE_VALUE)));
-
         // when
         Throwable throwable = catchThrowable(() -> offerFetcher.fetchOffers());
-
         // then
         assertThat(throwable).isInstanceOf(ResponseStatusException.class);
         assertThat(throwable.getMessage()).isEqualTo("404 NOT_FOUND");
@@ -153,10 +139,8 @@ public class OfferFetcherRestTemplateErrorIntegrationTest {
                 .willReturn(WireMock.aResponse()
                         .withStatus(HttpStatus.SC_UNAUTHORIZED)
                         .withHeader(CONTENT_TYPE_HEADER_KEY, APPLICATION_JSON_CONTENT_TYPE_VALUE)));
-
         // when
         Throwable throwable = catchThrowable(() -> offerFetcher.fetchOffers());
-
         // then
         assertThat(throwable).isInstanceOf(ResponseStatusException.class);
         assertThat(throwable.getMessage()).isEqualTo("401 UNAUTHORIZED");

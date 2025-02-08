@@ -3,7 +3,6 @@ package pl.pkasiewicz.apivalidationerror;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
-import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.ResultActions;
 import pl.pkasiewicz.BaseIntegrationTest;
 import pl.pkasiewicz.infrastructure.apivalidation.ApiValidationErrorDto;
@@ -26,11 +25,15 @@ public class ApiValidationFailedIntegrationTest extends BaseIntegrationTest {
                             "salary": ""
                         }
                         """.trim())
-                .contentType(MediaType.APPLICATION_JSON_VALUE));
+                .contentType(MediaType.APPLICATION_JSON_VALUE)
+        );
         // then
-        MvcResult mvcResult = perform.andExpect(status().isBadRequest()).andReturn();
-        String json = mvcResult.getResponse().getContentAsString();
+        String json = perform.andExpect(status().isBadRequest())
+                .andReturn()
+                .getResponse()
+                .getContentAsString();
         ApiValidationErrorDto result = objectMapper.readValue(json, ApiValidationErrorDto.class);
+
         assertThat(result.messages()).containsExactlyInAnyOrder(
                 "companyName must not be empty",
                 "position must not be empty",
@@ -48,11 +51,15 @@ public class ApiValidationFailedIntegrationTest extends BaseIntegrationTest {
                             "username": ""
                         }
                         """.trim())
-                .contentType(MediaType.APPLICATION_JSON_VALUE));
+                .contentType(MediaType.APPLICATION_JSON_VALUE)
+        );
         // then
-        MvcResult mvcResult = perform.andExpect(status().isBadRequest()).andReturn();
-        String json = mvcResult.getResponse().getContentAsString();
+        String json = perform.andExpect(status().isBadRequest())
+                .andReturn()
+                .getResponse()
+                .getContentAsString();
         ApiValidationErrorDto result = objectMapper.readValue(json, ApiValidationErrorDto.class);
+
         assertThat(result.messages()).containsExactlyInAnyOrder(
                 "username must not be empty",
                 "password must not be empty",

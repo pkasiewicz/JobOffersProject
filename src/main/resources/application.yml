@@ -4,8 +4,8 @@ spring:
     redis:
       time-to-live: PT60M
   redis:
-    host: ${REDIS_HOST:localhost}
-    port: ${REDIS_PORT:63792}
+    host: ${REDIS_HOST}
+    port: ${REDIS_PORT}
   data:
     mongodb:
       uri: mongodb://admin:admin@localhost:27017/joboffers
@@ -32,5 +32,5 @@ scheduling:
 auth:
   jwt:
     expirationDays: 30
-    secret: ${JWT_SECRET:1bc45769fbcdbd15a047a60546ef451866c89c6d221128aca1e25dde56e180a790519478911523471dfeb6cacf662d0b9916e72b07ff6ed8c32d2c151df9ebda5c56c90e263505a234a90444f615cd9ab0acf27abb8360bd5da72df875b0bd339138e8b210ad92bbbf5b73dd778e40c68dd64e21da1d6793285b42e069fb9d16b800292998dea10143658bf0bbbf9128cc9465b599c7eccc4072494841f6d502aab008e4019a176a3a36940db76c9a20ffcece7b7704970bc3c594ed7dfb16812e4a8ad6f24ba2fb3cb16a35ffa2e0f6c38d341da0ab47e43cf9ba8d05a4cbaf2fa4f2e797f014464069ee78cd3fa79f6d3d36444ce4113d83cdf8fcfbc00ac7}
+    secret: ${JWT_SECRET}
     issuer: job-offers-backend

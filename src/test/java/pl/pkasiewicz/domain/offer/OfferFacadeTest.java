@@ -61,9 +61,7 @@ class OfferFacadeTest {
 
     @Test
     void should_return_empty_list_when_no_saved_offers() {
-        //given
-
-        //when
+        //given && when
         List<OfferResponseDto> actual = offerFacade.findAllOffers();
         //then
         assertThat(actual).isEmpty();

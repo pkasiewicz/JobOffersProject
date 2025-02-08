@@ -38,7 +38,8 @@ public class UsernameDuplicateExceptionIntegrationTest extends BaseIntegrationTe
                             "password": "somePassword"
                         }
                         """.trim())
-                .contentType(MediaType.APPLICATION_JSON_VALUE));
+                .contentType(MediaType.APPLICATION_JSON_VALUE)
+        );
         // then
         String registeredUserJson = firstRequest.andExpect(status().isCreated())
                 .andReturn()
@@ -52,6 +53,7 @@ public class UsernameDuplicateExceptionIntegrationTest extends BaseIntegrationTe
                 () -> assertThat(registrationResultDto.id()).isNotNull()
         );
 
+
         // step 2:
         // given && when
         ResultActions secondRequest = mockMvc.perform(post("/register")
@@ -61,7 +63,8 @@ public class UsernameDuplicateExceptionIntegrationTest extends BaseIntegrationTe
                             "password": "somePassword"
                         }
                         """.trim())
-                .contentType(MediaType.APPLICATION_JSON_VALUE));
+                .contentType(MediaType.APPLICATION_JSON_VALUE)
+        );
         // then
         String duplicatedUserJson = secondRequest.andExpect(status().isConflict())
                 .andReturn()
