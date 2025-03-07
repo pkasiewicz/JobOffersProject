@@ -4,11 +4,12 @@ spring:
     redis:
       time-to-live: PT60M
   redis:
-    host: ${REDIS_HOST}
-    port: ${REDIS_PORT}
+    host: ${REDIS_HOST:redis}
+    port: ${REDIS_PORT:6379}
   data:
     mongodb:
-      uri: mongodb://admin:admin@localhost:27017/joboffers
+      uri: mongodb://${MONGO_USER}:${MONGO_PASSWORD}@${MONGO_HOST}:${MONGO_PORT}/${MONGO_DB_NAME}?authSource=${MONGO_AUTH_SOURCE}
+#      uri: mongodb://admin:admin@localhost:27017/joboffers?authSource=admin
       auto-index-creation: true
   mvc:
     pathmatch:
@@ -34,3 +35,6 @@ auth:
     expirationDays: 30
     secret: ${JWT_SECRET}
     issuer: job-offers-backend
+
+server:
+  port: 8000
