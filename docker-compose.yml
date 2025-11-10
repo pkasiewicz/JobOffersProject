@@ -47,7 +47,7 @@ services:
   joboffers-backend:
     container_name: joboffers-backend
     build: .
-#    image: 585008054059.dkr.ecr.eu-central-1.amazonaws.com/joboffers-backend:latest
+    image: joboffers-backend:latest
     restart: always
     platform: linux/amd64
     depends_on:
@@ -64,13 +64,6 @@ services:
       REDIS_HOST: redis
       REDIS_PORT: 6379
 
-#  joboffers-frontend:
-#    container_name: joboffers-frontend
-##    image: joboffers-frontend:latest
-#    image: 585008054059.dkr.ecr.eu-central-1.amazonaws.com/joboffers-frontend:latest
-#    depends_on:
-#      - joboffers-backend
-#    restart: always
-#    ports:
-#      - "80:80"
-#
+networks:
+  joboffers-net:
+    external: true
