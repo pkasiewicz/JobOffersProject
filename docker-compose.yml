@@ -50,6 +50,8 @@ services:
     image: joboffers-backend:latest
     restart: always
     platform: linux/amd64
+    networks:
+      - joboffers-net
     depends_on:
       - redis
     ports:
