@@ -1,6 +1,7 @@
 package pl.pkasiewicz.domain.offer;
 
 import lombok.AllArgsConstructor;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import pl.pkasiewicz.domain.offer.dto.OfferRequestDto;
 import pl.pkasiewicz.domain.offer.dto.OfferResponseDto;
@@ -14,6 +15,7 @@ public class OfferFacade {
     private final OfferRepository offerRepository;
     private final FetcherService fetcherService;
 
+    @CacheEvict(value = "jobOffers", allEntries = true)
     public OfferResponseDto saveOffer(OfferRequestDto offerToSave) {
         Offer savedOffer = offerRepository.save(OfferMapper.mapToEntity(offerToSave));
         return OfferMapper.mapToOfferResponseDto(savedOffer);

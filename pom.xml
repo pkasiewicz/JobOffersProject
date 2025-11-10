@@ -138,7 +138,7 @@
     </dependencies>
 
     <build>
-        <finalName>joboffers</finalName>
+        <finalName>joboffers-backend</finalName>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
