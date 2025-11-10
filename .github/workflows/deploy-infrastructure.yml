@@ -3,7 +3,7 @@ name: Deploy Backend on VPS for Job Offers Project
 on:
   push:
     branches:
-      - main
+      - master
 
 jobs:
   build-and-deploy:
