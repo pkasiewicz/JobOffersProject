@@ -46,7 +46,7 @@ services:
 
   joboffers-backend:
     container_name: joboffers-backend
-    build: ./joboffers-backend
+    build: .
 #    image: 585008054059.dkr.ecr.eu-central-1.amazonaws.com/joboffers-backend:latest
     restart: always
     platform: linux/amd64
