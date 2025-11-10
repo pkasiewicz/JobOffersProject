@@ -6,9 +6,9 @@
 
 ## Live Demo
 
-🌐 [Visit the live site](http://ec2-3-79-188-43.eu-central-1.compute.amazonaws.com/)
+🌐 [Visit the live site](https://joboffers.pkasiewicz.pl/)
 
-🧪 [API documentation (Swagger UI)](http://ec2-3-79-188-43.eu-central-1.compute.amazonaws.com:8000/swagger-ui/index.html)
+🧪 [API documentation (Swagger UI)](http://api.joboffers.pkasiewicz.pl/swagger-ui/index.html)
 
 ---
 
