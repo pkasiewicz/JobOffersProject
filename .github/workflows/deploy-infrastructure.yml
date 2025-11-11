@@ -37,6 +37,6 @@ jobs:
             cd ~/apps/joboffers/joboffers-backend
             docker pull ghcr.io/${{ github.repository_owner }}/joboffers-backend:latest
 
-            docker-compose up -d
+            docker-compose up -d --force-recreate --no-deps joboffers-backend
             docker image prune -af --filter "until=24h" || true
     
