@@ -11,6 +11,8 @@ services:
       MONGO_INITDB_DATABASE: joboffers
     volumes:
       - ./init-mongo.js:/docker-entrypoint-initdb.d/init-mongo.js:ro
+    networks:
+      - joboffers-net
 
   mongo-express:
     image: mongo-express
@@ -26,6 +28,8 @@ services:
       ME_CONFIG_MONGODB_URL: mongodb://root:example@mongo:27017
       ME_CONFIG_BASICAUTH_USERNAME: express
       ME_CONFIG_BASICAUTH_PASSWORD: express
+    networks:
+      - joboffers-net
 
   redis:
     image: redis
@@ -33,6 +37,8 @@ services:
     ports:
       - "6379:6379"
     restart: always
+    networks:
+      - joboffers-net
 
   redis-commander:
     image: rediscommander/redis-commander:latest
@@ -43,6 +49,8 @@ services:
     environment:
       - REDIS_HOSTS=local:redis:6379
     restart: always
+    networks:
+      - joboffers-net
 
   joboffers-backend:
     container_name: joboffers-backend
@@ -54,6 +62,7 @@ services:
       - joboffers-net
     depends_on:
       - redis
+      - mongo
     ports:
       - "8000:8000"
     environment:
