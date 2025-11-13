@@ -34,9 +34,9 @@ jobs:
           username: ${{ secrets.VPS_USER }}
           key: ${{ secrets.VPS_SSH_KEY }}
           script: |
-            cd ~/apps/joboffers/joboffers-backend
-            docker pull ghcr.io/${{ github.repository_owner }}/joboffers-backend:latest
+            cd ~/apps/joboffers/deploy
+            docker-compose pull
 
-            docker-compose up -d --force-recreate --no-deps joboffers-backend
+            docker-compose up -d --force-recreate
             docker image prune -af --filter "until=24h" || true
     
