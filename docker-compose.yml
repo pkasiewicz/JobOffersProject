@@ -53,13 +53,10 @@ services:
       - joboffers-net
 
   joboffers-backend:
+    image: ghcr.io/pkasiewicz/joboffers-backend:latest
     container_name: joboffers-backend
-    build: .
-    image: joboffers-backend:latest
     restart: always
     platform: linux/amd64
-    networks:
-      - joboffers-net
     depends_on:
       - redis
       - mongo
@@ -74,6 +71,17 @@ services:
       MONGO_AUTH_SOURCE: admin
       REDIS_HOST: redis
       REDIS_PORT: 6379
+    networks:
+      - joboffers-net
+
+  joboffers-frontend:
+    image: ghcr.io/pkasiewicz/joboffers-frontend:latest
+    container_name: joboffers-frontend
+    networks:
+      - joboffers-net
+    restart: always
+    ports:
+      - "8083:80"
 
 networks:
   joboffers-net:
