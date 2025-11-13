@@ -1,12 +1,10 @@
-db.getSiblingDB("admin").createUser(
-    {
-        user: "admin",
-        pwd: "admin",
-        roles: [
-            {
-                role: "readWrite",
-                db: "joboffers"
-            }
-        ]
-    }
-)
+db.getSiblingDB("admin").createUser({
+    user: "${MONGO_USER}",
+    pwd: "${MONGO_PASSWORD}",
+    roles: [
+        {
+            role: "readWrite",
+            db: "${MONGO_DB_NAME}"
+        }
+    ]
+});
