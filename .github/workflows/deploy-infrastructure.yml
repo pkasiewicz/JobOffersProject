@@ -35,8 +35,8 @@ jobs:
           key: ${{ secrets.VPS_SSH_KEY }}
           script: |
             cd ~/apps/joboffers/deploy
-            docker-compose pull
+            docker-compose pull joboffers-backend
 
-            docker-compose up -d --force-recreate
+            docker-compose up -d --force-recreate joboffers-backend
             docker image prune -af --filter "until=24h" || true
     
